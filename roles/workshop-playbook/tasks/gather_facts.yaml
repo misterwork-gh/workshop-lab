@@ -8,3 +8,4 @@
     msg:
     - "Hostname is {{ ansible_net_hostname }}"
     - "OS version is {{ ansible_net_version }}"
+    - "IP address is {{ ansible_net_all_ipv4_addresses }}"
