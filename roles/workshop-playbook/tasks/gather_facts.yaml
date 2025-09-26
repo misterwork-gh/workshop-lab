@@ -1,7 +1,7 @@
 ---
 - name: "Task 1: Gather facts"
   cisco.ios.ios_facts:
-  gather_subset: all
+    gather_subset: all
 
 - name: Show hostname and OS version
   debug:
