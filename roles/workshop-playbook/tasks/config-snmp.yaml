@@ -1,16 +1,18 @@
 ---
-- name: "Task 13: Configure SNMP"
+- name: "Task 3: Configure SNMP"
   cisco.ios.ios_snmp_server:
-
+  state: merged
   config:
-      communities:
-        - name: public
-          acl_v4: 10
-          rw: false
-        - name: private  
-          acl_v4: 20
-          rw: true
-          
+    location: "Datacentre-1"
+    packet_size: 1024
+    communities:
+      - name: public
+        acl_v4: 10
+        rw: false
+      - name: private  
+        acl_v4: 20
+        rw: true
+- 
 #      contact: contact updated using merged
 #      engine_id:
 #        - id: AB0C5342FF0F
