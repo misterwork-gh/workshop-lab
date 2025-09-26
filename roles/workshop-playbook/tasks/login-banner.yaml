@@ -1,0 +1,15 @@
+---
+- name: "Task 2: Display banner"
+  cisco.ios.ios_banner:
+
+    banner: login
+    text: "
+      ##############################################\n
+      #                                            #\n
+      #  You have succesfully entered this system  #\n
+      #                                            #\n
+      #     Contact admin at admin@example.com     #\n     
+      #                                            #\n
+      ##############################################\n
+      "
+    state: present
