@@ -1,0 +1,23 @@
+---
+- name: "Task 5: Health Check Workflow"
+
+  vars_files: 
+    - vars/thresholds.yml 
+  
+  tasks:
+    - name: Get 5-second CPU utilisation
+      cisco.ios.ios_command:
+      commands: "show processes cpu"
+      register: cpu_output
+      when: ansible_network_os == 'ios' #conditional execution based on OS
+
+    - name: Extract CPU utilisation
+      set_fact:
+        five_sec_cpu: "{{cpu_output.stdout[0] | regex_search('five seconds: (\\d+%','\\1'))[0] | int')}}"
+      when: cpu_output is defined
+
+    - name: Add Critical Host to a temporary in-memory group
+      ansible.builtin.add_host:
+      name:"{{inventory_hostname}}"
+      groups: critical_reboot_list
+      when: five_sec_cpu is defined and five_sec_cpu > cpu_threshold

@@ -1,0 +1,23 @@
+---
+- name: "Task 4: Create New User"
+  cisco.ios.ios_user:
+
+  vars_prompt:
+    - name:"admin_username"
+      prompt:"Enter the new admin username"
+      private:no #username is shown
+    - name:"admin_password"
+      prompt:"Enter the password for the account"
+      private:yes #password is hidden
+      
+  tasks:
+  
+    - name: Ensure the admin user exists with privilege 15
+      cisco.ios.ios_user:
+      name:"{{admin_username}}"
+      privilege: 15
+      password:"{{admin_password}}"
+      password_type: secret
+      state: present
+
+

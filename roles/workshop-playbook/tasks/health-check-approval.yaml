@@ -1,0 +1,11 @@
+---
+- name: "Task 5a: Health Check Workflow - Approval for reboot"
+  hosts: critical_reboot_list
+  gather_facts: no
+
+  tasks: 
+    - name: Initiate reload on critical device
+      cisco.ios.ios_command:
+      commands: 
+      - "reload"
+      - "yes"
